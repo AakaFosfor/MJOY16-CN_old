@@ -1,0 +1,205 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	usbFunctionSetup
+  18               	usbFunctionSetup:
+  19               	.LFB6:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LM2:
+  25 0000 FC01      		movw r30,r24
+  26 0002 8181      		ldd r24,Z+1
+  27               	.LVL1:
+  28 0004 8823      		tst r24
+  29 0006 01F0      		breq .L3
+  30 0008 8130      		cpi r24,lo8(1)
+  31 000a 01F4      		brne .L2
+  32               	.LM3:
+  33 000c 9398      		cbi 50-32,3
+  34 000e 00C0      		rjmp .L2
+  35               	.L3:
+  36               	.LM4:
+  37 0010 939A      		sbi 50-32,3
+  38               	.L2:
+  39               	.LM5:
+  40 0012 80E0      		ldi r24,lo8(0)
+  41               	/* epilogue start */
+  42 0014 0895      		ret
+  43               	.LFE6:
+  45               	.global	main
+  47               	main:
+  48               	.LFB7:
+  49               	.LM6:
+  50 0016 CF93      		push r28
+  51 0018 DF93      		push r29
+  52               	/* prologue: function */
+  53               	/* frame size = 0 */
+  54               	.LM7:
+  55 001a 8B9A      		sbi 49-32,3
+  56               	.LM8:
+  57 001c 2EE0      		ldi r18,lo8(14)
+  58 001e 88E1      		ldi r24,lo8(24)
+  59 0020 90E0      		ldi r25,hi8(24)
+  60               	/* #APP */
+  61               	 ;  31 "main.c" 1
+  62 0022 0FB6      		in __tmp_reg__,__SREG__
+  63 0024 F894      		cli
+  64 0026 A895      		wdr
+  65 0028 81BD      		out 33,r24
+  66 002a 0FBE      		out __SREG__,__tmp_reg__
+  67 002c 21BD      		out 33,r18
+  68               	 ;  0 "" 2
+  69               	.LM9:
+  70               	/* #NOAPP */
+  71 002e 0E94 0000 		call usbInit
+  72               	.LM10:
+  73 0032 889A      		sbi 49-32,0
+  74 0034 20E0      		ldi r18,lo8(0)
+  75               	.LVL2:
+  76               	.LBB24:
+  77               	.LBB25:
+  78               	.LBB26:
+  79               	.LBB27:
+  80               	.LM11:
+  81 0036 40E7      		ldi r20,lo8(6000)
+  82 0038 57E1      		ldi r21,hi8(6000)
+  83               	.L7:
+  84               	.LBE27:
+  85               	.LBE26:
+  86               	.LBE25:
+  87               	.LBE24:
+  88               	.LM12:
+  89               	/* #APP */
+  90               	 ;  37 "main.c" 1
+  91 003a A895      		wdr
+  92               	 ;  0 "" 2
+  93               	/* #NOAPP */
+  94               	.LBB31:
+  95               	.LBB30:
+  96               	.LBB29:
+  97               	.LBB28:
+  98               	.LM13:
+  99 003c CA01      		movw r24,r20
+ 100               	.LVL3:
+ 101               	/* #APP */
+ 102               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 103 003e 0197      		1: sbiw r24,1
+ 104 0040 01F4      		brne 1b
+ 105               	 ;  0 "" 2
+ 106               	/* #NOAPP */
+ 107               	.LBE28:
+ 108               	.LBE29:
+ 109               	.LBE30:
+ 110               	.LBE31:
+ 111               	.LM14:
+ 112 0042 2F5F      		subi r18,lo8(-(1))
+ 113 0044 2A3F      		cpi r18,lo8(-6)
+ 114 0046 01F4      		brne .L7
+ 115               	.LM15:
+ 116 0048 8898      		cbi 49-32,0
+ 117               	.LM16:
+ 118               	/* #APP */
+ 119               	 ;  42 "main.c" 1
+ 120 004a 7894      		sei
+ 121               	 ;  0 "" 2
+ 122               	/* #NOAPP */
+ 123               	.LBB32:
+ 124               	.LBB33:
+ 125               	.LBB34:
+ 126               	.LBB35:
+ 127               	.LM17:
+ 128 004c CCE2      		ldi r28,lo8(300)
+ 129 004e D1E0      		ldi r29,hi8(300)
+ 130               	.LVL4:
+ 131               	.L10:
+ 132               	.LBE35:
+ 133               	.LBE34:
+ 134               	.LBE33:
+ 135               	.LBE32:
+ 136               	.LM18:
+ 137               	/* #APP */
+ 138               	 ;  45 "main.c" 1
+ 139 0050 A895      		wdr
+ 140               	 ;  0 "" 2
+ 141               	.LM19:
+ 142               	/* #NOAPP */
+ 143 0052 0E94 0000 		call usbPoll
+ 144               	.LVL5:
+ 145               	.LM20:
+ 146 0056 9398      		cbi 50-32,3
+ 147 0058 80E2      		ldi r24,lo8(20000)
+ 148 005a 9EE4      		ldi r25,hi8(20000)
+ 149               	.LVL6:
+ 150               	.L8:
+ 151               	.LBB39:
+ 152               	.LBB38:
+ 153               	.LBB37:
+ 154               	.LBB36:
+ 155               	.LM21:
+ 156 005c FE01      		movw r30,r28
+ 157               	.LVL7:
+ 158               	/* #APP */
+ 159               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 160 005e 3197      		1: sbiw r30,1
+ 161 0060 01F4      		brne 1b
+ 162               	 ;  0 "" 2
+ 163               	/* #NOAPP */
+ 164               	.LBE36:
+ 165               	.LBE37:
+ 166               	.LM22:
+ 167 0062 0197      		sbiw r24,1
+ 168               	.LM23:
+ 169 0064 01F4      		brne .L8
+ 170               	.LBE38:
+ 171               	.LBE39:
+ 172               	.LM24:
+ 173 0066 939A      		sbi 50-32,3
+ 174 0068 80E2      		ldi r24,lo8(20000)
+ 175 006a 9EE4      		ldi r25,hi8(20000)
+ 176               	.LVL8:
+ 177               	.L9:
+ 178               	.LBB40:
+ 179               	.LBB41:
+ 180               	.LBB42:
+ 181               	.LBB43:
+ 182               	.LM25:
+ 183 006c FE01      		movw r30,r28
+ 184               	.LVL9:
+ 185               	/* #APP */
+ 186               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 187 006e 3197      		1: sbiw r30,1
+ 188 0070 01F4      		brne 1b
+ 189               	 ;  0 "" 2
+ 190               	/* #NOAPP */
+ 191               	.LBE43:
+ 192               	.LBE42:
+ 193               	.LM26:
+ 194 0072 0197      		sbiw r24,1
+ 195               	.LM27:
+ 196 0074 01F4      		brne .L9
+ 197 0076 00C0      		rjmp .L10
+ 198               	.LBE41:
+ 199               	.LBE40:
+ 200               	.LFE7:
+ 234               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:2      *ABS*:0000003f __SREG__
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:3      *ABS*:0000003e __SP_H__
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:4      *ABS*:0000003d __SP_L__
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:5      *ABS*:00000034 __CCP__
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:18     .text:00000000 usbFunctionSetup
+C:\Users\jack\AppData\Local\Temp/ccRHtvV6.s:47     .text:00000016 main
+
+UNDEFINED SYMBOLS
+usbInit
+usbPoll
